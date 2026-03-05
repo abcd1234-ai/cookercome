@@ -1,47 +1,123 @@
 <!-- 厨师登录 -->
- <template>
- 
- <div class="cookerLogin"> 
-  <div class="cookerLogin-title">厨师登录</div>
-  <div class="cookerLogin-input">
-    <input type="text" placeholder="请输入用户名">
-    <input type="password" placeholder="请输入密码">
+<template>
+  <div class="cooker-login">
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>厨师登录</span>
+
+      </div>
+      <el-form :model="user" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="username">
+          <el-input type="text" v-model="user.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="user.password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button @click="resetForm('ruleForm')">注册</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+
   </div>
-  <div class="cookerLogin-btn">
-    <button>登录</button>
-  </div>
- </div>
+</template>
 
-  
- </template>
- <script> 
- export default {
-  name: "CookerLogin"
- }
- </script>
- <style>
- .cookerLogin{
-   width: 100%;
-   height: 100%;
-   background-color: #f5f5f5;
- }
+<script>
+export default {
+  name: 'CookerLogin',
+  data() {
+    var validateUsername = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入用户名'));
+      } else {
+        callback();
+      }
+    };
+    var validatePassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      }
 
- .cookerLogin-title{
-   width: 100%;
-   height: 100px;
-   line-height: 100px;
-   text-align: center;
-   font-size: 20px;
-   font-weight: bold;
-   color: #333;
- }
 
- .cookerLogin-input{
-   width: 100%;
-   height: 200px;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
- }
- </style>
+      callback();
+    }
+
+    return {
+
+      user: {
+        username: '',
+        password: ''
+      },
+
+      rules: {
+        username: [
+          { validator: validateUsername, trigger: 'blur' }
+        ],
+        password: [
+          { validator: validatePassword, trigger: 'blur' }
+        ]
+
+      }
+    }
+  },
+
+
+
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+          this.$router.push('/cooker')
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.cooker-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.clearfix:before{
+  content: "";
+  display: table;
+}
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both
+}
+
+.box-card {
+  width: 480px;
+}
+</style>
