@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Backend/Backend.iml" filepath="$PROJECT_DIR$/Backend/Backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cookercome.iml" filepath="$PROJECT_DIR$/.idea/cookercome.iml" />
-      <module fileurl="file://$PROJECT_DIR$/front/front.iml" filepath="$PROJECT_DIR$/front/front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/front/frontend-user.iml" filepath="$PROJECT_DIR$/front/frontend-user.iml" />
     </modules>
   </component>
 </project>
